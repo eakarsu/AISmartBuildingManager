@@ -22,6 +22,39 @@ import ReportsPage from './pages/ReportsPage'
 import SettingsPage from './pages/SettingsPage'
 import ActivityPage from './pages/ActivityPage'
 import ProfilePage from './pages/ProfilePage'
+import BuildingHealthPage from './pages/BuildingHealthPage'
+import ThresholdAlertsPage from './pages/ThresholdAlertsPage'
+import MaintenancePredictionPage from './pages/MaintenancePredictionPage'
+import EnergyOptimizerPage from './pages/EnergyOptimizerPage'
+import OccupancyOptimizationPage from './pages/OccupancyOptimizationPage'
+import PredictiveMaintenanceAIPage from './pages/PredictiveMaintenanceAIPage'
+import SecurityAnomalyPage from './pages/SecurityAnomalyPage'
+import EnergyForecastPage from './pages/EnergyForecastPage'
+import ComfortOptimizationPage from './pages/ComfortOptimizationPage'
+import WaterUsageOptimizationPage from './pages/WaterUsageOptimizationPage'
+
+// === Batch 07 Gaps & Frontend Mounts ===
+import CfWholebuildingEnergyOptimization from './pages/CfWholebuildingEnergyOptimization';
+import CfThermalComfortPrediction from './pages/CfThermalComfortPrediction';
+import CfPredictiveMaintenanceEngine from './pages/CfPredictiveMaintenanceEngine';
+import CfAnomalyDetectionForSecurity from './pages/CfAnomalyDetectionForSecurity';
+import CfOccupancydrivenDemandResponse from './pages/CfOccupancydrivenDemandResponse';
+import CfWaterWasteOptimization from './pages/CfWaterWasteOptimization';
+import GapNoOccupancyoptimizationHvaclightingAutotu from './pages/GapNoOccupancyoptimizationHvaclightingAutotu';
+import GapNoPredictivemaintenanceFailurePrediction from './pages/GapNoPredictivemaintenanceFailurePrediction';
+import GapNoEnergyforecastAi from './pages/GapNoEnergyforecastAi';
+import GapNoComfortoptimizationEnergyVsComfort from './pages/GapNoComfortoptimizationEnergyVsComfort';
+import GapNoSecurityanomalydetection from './pages/GapNoSecurityanomalydetection';
+import GapNoWaterusageoptimizationLeakDetection from './pages/GapNoWaterusageoptimizationLeakDetection';
+import GapNoRealtimeBuildingDashboardRouteStubsO from './pages/GapNoRealtimeBuildingDashboardRouteStubsO';
+import GapNoIotDeviceProtocolIntegrationBacnetMo from './pages/GapNoIotDeviceProtocolIntegrationBacnetMo';
+import GapNoOccupantMobileAppEndpoints from './pages/GapNoOccupantMobileAppEndpoints';
+import GapNoTenantSubmeteringBillback from './pages/GapNoTenantSubmeteringBillback';
+import GapLimitedEmergencyResponseWorkflows from './pages/GapLimitedEmergencyResponseWorkflows';
+import GapNoVendorManagementContractors from './pages/GapNoVendorManagementContractors';
+import GapNoDemandresponseGridIntegration from './pages/GapNoDemandresponseGridIntegration';
+// === End Batch 07 ===
+
 
 function ProtectedRoute({ children }) {
   const token = localStorage.getItem('token')
@@ -73,6 +106,37 @@ export default function App() {
         <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
         <Route path="/activity" element={<ProtectedRoute><ActivityPage /></ProtectedRoute>} />
         <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+        <Route path="/building-health" element={<ProtectedRoute><BuildingHealthPage /></ProtectedRoute>} />
+        <Route path="/threshold-alerts" element={<ProtectedRoute><ThresholdAlertsPage /></ProtectedRoute>} />
+        <Route path="/maintenance-prediction" element={<ProtectedRoute><MaintenancePredictionPage /></ProtectedRoute>} />
+        <Route path="/energy-optimizer" element={<ProtectedRoute><EnergyOptimizerPage /></ProtectedRoute>} />
+        <Route path="/occupancy-optimization" element={<ProtectedRoute><OccupancyOptimizationPage /></ProtectedRoute>} />
+        <Route path="/predictive-maintenance-ai" element={<ProtectedRoute><PredictiveMaintenanceAIPage /></ProtectedRoute>} />
+        <Route path="/security-anomaly" element={<ProtectedRoute><SecurityAnomalyPage /></ProtectedRoute>} />
+        <Route path="/energy-forecast" element={<ProtectedRoute><EnergyForecastPage /></ProtectedRoute>} />
+        <Route path="/comfort-optimization" element={<ProtectedRoute><ComfortOptimizationPage /></ProtectedRoute>} />
+        <Route path="/water-usage-optimization" element={<ProtectedRoute><WaterUsageOptimizationPage /></ProtectedRoute>} />
+          // === Batch 07 Gaps & Frontend Mounts ===
+          <Route path='/cf-wholebuilding-energy-optimization' element={<CfWholebuildingEnergyOptimization />} />
+          <Route path='/cf-thermal-comfort-prediction' element={<CfThermalComfortPrediction />} />
+          <Route path='/cf-predictive-maintenance-engine' element={<CfPredictiveMaintenanceEngine />} />
+          <Route path='/cf-anomaly-detection-for-security' element={<CfAnomalyDetectionForSecurity />} />
+          <Route path='/cf-occupancydriven-demand-response' element={<CfOccupancydrivenDemandResponse />} />
+          <Route path='/cf-water-waste-optimization' element={<CfWaterWasteOptimization />} />
+          <Route path='/gap-no-occupancyoptimization-hvaclighting-autotu' element={<GapNoOccupancyoptimizationHvaclightingAutotu />} />
+          <Route path='/gap-no-predictivemaintenance-failure-prediction' element={<GapNoPredictivemaintenanceFailurePrediction />} />
+          <Route path='/gap-no-energyforecast-ai' element={<GapNoEnergyforecastAi />} />
+          <Route path='/gap-no-comfortoptimization-energy-vs-comfort' element={<GapNoComfortoptimizationEnergyVsComfort />} />
+          <Route path='/gap-no-securityanomalydetection' element={<GapNoSecurityanomalydetection />} />
+          <Route path='/gap-no-waterusageoptimization-leak-detection' element={<GapNoWaterusageoptimizationLeakDetection />} />
+          <Route path='/gap-no-realtime-building-dashboard-route-stubs-o' element={<GapNoRealtimeBuildingDashboardRouteStubsO />} />
+          <Route path='/gap-no-iot-device-protocol-integration-bacnet-mo' element={<GapNoIotDeviceProtocolIntegrationBacnetMo />} />
+          <Route path='/gap-no-occupant-mobile-app-endpoints' element={<GapNoOccupantMobileAppEndpoints />} />
+          <Route path='/gap-no-tenant-submetering-billback' element={<GapNoTenantSubmeteringBillback />} />
+          <Route path='/gap-limited-emergency-response-workflows' element={<GapLimitedEmergencyResponseWorkflows />} />
+          <Route path='/gap-no-vendor-management-contractors' element={<GapNoVendorManagementContractors />} />
+          <Route path='/gap-no-demandresponse-grid-integration' element={<GapNoDemandresponseGridIntegration />} />
+          // === End Batch 07 ===
       </Routes>
     </>
   )

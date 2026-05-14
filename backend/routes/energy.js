@@ -6,8 +6,16 @@ const router = Router();
 
 router.get('/', async (req, res, next) => {
   try {
-    const result = await pool.query('SELECT * FROM energy_records ORDER BY id');
-    res.json(result.rows);
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 20;
+    const offset = (page - 1) * limit;
+    const result = await pool.query('SELECT * FROM energy_records ORDER BY id LIMIT $1 OFFSET $2', [limit, offset]);
+    const countResult = await pool.query('SELECT COUNT(*) FROM energy_records');
+    const total = parseInt(countResult.rows[0].count);
+    res.json({
+      data: result.rows,
+      pagination: { page, limit, total, totalPages: Math.ceil(total / limit) },
+    });
   } catch (err) {
     next(err);
   }

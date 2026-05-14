@@ -1,6 +1,6 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Thermometer, Lightbulb, Wind, Wrench, Zap, Heart, Shield, LayoutGrid, Activity, TrendingUp, Bell, Users, Droplets, Car, UserCheck, Package, Flame, ArrowUpDown, BarChart3, ClipboardList, Settings, UserCircle } from 'lucide-react'
+import { Thermometer, Lightbulb, Wind, Wrench, Zap, Heart, Shield, LayoutGrid, Activity, TrendingUp, Bell, Users, Droplets, Car, UserCheck, Package, Flame, ArrowUpDown, BarChart3, ClipboardList, Settings, UserCircle, ShieldAlert } from 'lucide-react'
 import Navbar from '../components/Navbar'
 
 const features = [
@@ -23,6 +23,16 @@ const features = [
   { name: 'Activity Log', desc: 'Audit trail & user activity tracking', icon: ClipboardList, route: '/activity', color: 'from-lime-500 to-green-500', bgColor: 'bg-lime-500/10', textColor: 'text-lime-400' },
   { name: 'Building Settings', desc: 'Configuration & system preferences', icon: Settings, route: '/settings', color: 'from-gray-400 to-slate-500', bgColor: 'bg-gray-500/10', textColor: 'text-gray-400' },
   { name: 'User Profile', desc: 'Manage your account & password', icon: UserCircle, route: '/profile', color: 'from-sky-500 to-blue-500', bgColor: 'bg-sky-500/10', textColor: 'text-sky-400' },
+  { name: 'Building Health', desc: 'Cross-domain AI health analysis (HVAC + Energy + Maintenance)', icon: Activity, route: '/building-health', color: 'from-green-500 to-teal-500', bgColor: 'bg-green-500/10', textColor: 'text-green-400' },
+  { name: 'Threshold Alerts', desc: 'Check HVAC readings against configured alert limits', icon: Bell, route: '/threshold-alerts', color: 'from-amber-500 to-yellow-500', bgColor: 'bg-amber-500/10', textColor: 'text-amber-400' },
+  { name: 'Maintenance Prediction', desc: 'AI failure probability for all equipment', icon: Wrench, route: '/maintenance-prediction', color: 'from-red-600 to-rose-600', bgColor: 'bg-red-500/10', textColor: 'text-red-400' },
+  { name: 'Energy Optimizer', desc: 'AI cost-reduction strategies for energy usage', icon: Zap, route: '/energy-optimizer', color: 'from-lime-500 to-green-500', bgColor: 'bg-lime-500/10', textColor: 'text-lime-400' },
+  { name: 'Occupancy Optimization', desc: 'AI HVAC/lighting setpoint and schedule recommendations', icon: Users, route: '/occupancy-optimization', color: 'from-blue-500 to-cyan-500', bgColor: 'bg-blue-500/10', textColor: 'text-blue-400' },
+  { name: 'Predictive Maintenance (AI)', desc: 'Failure-window predictions, PM schedule, parts-to-stage', icon: Wrench, route: '/predictive-maintenance-ai', color: 'from-amber-500 to-orange-500', bgColor: 'bg-amber-500/10', textColor: 'text-amber-400' },
+  { name: 'Security Anomaly Detection', desc: 'Off-hours / tailgating / badge-clone / unusual-path', icon: ShieldAlert, route: '/security-anomaly', color: 'from-red-500 to-rose-500', bgColor: 'bg-red-500/10', textColor: 'text-red-400' },
+  { name: 'Energy Forecast', desc: 'AI usage and peak demand projections', icon: TrendingUp, route: '/energy-forecast', color: 'from-blue-500 to-indigo-500', bgColor: 'bg-blue-500/10', textColor: 'text-blue-400' },
+  { name: 'Comfort Optimization', desc: 'AI HVAC setpoint and humidity tuning', icon: Thermometer, route: '/comfort-optimization', color: 'from-orange-500 to-amber-500', bgColor: 'bg-orange-500/10', textColor: 'text-orange-400' },
+  { name: 'Water Usage Optimization', desc: 'AI leak detection and conservation', icon: Droplets, route: '/water-usage-optimization', color: 'from-cyan-500 to-sky-500', bgColor: 'bg-cyan-500/10', textColor: 'text-cyan-400' },
 ]
 
 const stats = [
