@@ -33,6 +33,7 @@ export default function Navbar() {
     { path: '/alerts', label: 'Alerts' },
     { path: '/reports', label: 'Reports' },
     { path: '/activity', label: 'Activity' },
+    { path: '/custom-views', label: 'Building Views' },
   ]
 
   return (

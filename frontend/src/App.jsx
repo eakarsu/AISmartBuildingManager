@@ -32,6 +32,7 @@ import SecurityAnomalyPage from './pages/SecurityAnomalyPage'
 import EnergyForecastPage from './pages/EnergyForecastPage'
 import ComfortOptimizationPage from './pages/ComfortOptimizationPage'
 import WaterUsageOptimizationPage from './pages/WaterUsageOptimizationPage'
+import CustomViewsPage from './pages/CustomViewsPage'
 
 // === Batch 07 Gaps & Frontend Mounts ===
 import CfWholebuildingEnergyOptimization from './pages/CfWholebuildingEnergyOptimization';
@@ -116,7 +117,7 @@ export default function App() {
         <Route path="/energy-forecast" element={<ProtectedRoute><EnergyForecastPage /></ProtectedRoute>} />
         <Route path="/comfort-optimization" element={<ProtectedRoute><ComfortOptimizationPage /></ProtectedRoute>} />
         <Route path="/water-usage-optimization" element={<ProtectedRoute><WaterUsageOptimizationPage /></ProtectedRoute>} />
-          // === Batch 07 Gaps & Frontend Mounts ===
+          {/* === Batch 07 Gaps & Frontend Mounts === */}
           <Route path='/cf-wholebuilding-energy-optimization' element={<CfWholebuildingEnergyOptimization />} />
           <Route path='/cf-thermal-comfort-prediction' element={<CfThermalComfortPrediction />} />
           <Route path='/cf-predictive-maintenance-engine' element={<CfPredictiveMaintenanceEngine />} />
@@ -136,7 +137,8 @@ export default function App() {
           <Route path='/gap-limited-emergency-response-workflows' element={<GapLimitedEmergencyResponseWorkflows />} />
           <Route path='/gap-no-vendor-management-contractors' element={<GapNoVendorManagementContractors />} />
           <Route path='/gap-no-demandresponse-grid-integration' element={<GapNoDemandresponseGridIntegration />} />
-          // === End Batch 07 ===
+          {/* === End Batch 07 === */}
+          <Route path="/custom-views" element={<ProtectedRoute><CustomViewsPage /></ProtectedRoute>} />
       </Routes>
     </>
   )
