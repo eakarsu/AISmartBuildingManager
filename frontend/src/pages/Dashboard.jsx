@@ -33,6 +33,7 @@ const features = [
   { name: 'Energy Forecast', desc: 'AI usage and peak demand projections', icon: TrendingUp, route: '/energy-forecast', color: 'from-blue-500 to-indigo-500', bgColor: 'bg-blue-500/10', textColor: 'text-blue-400' },
   { name: 'Comfort Optimization', desc: 'AI HVAC setpoint and humidity tuning', icon: Thermometer, route: '/comfort-optimization', color: 'from-orange-500 to-amber-500', bgColor: 'bg-orange-500/10', textColor: 'text-orange-400' },
   { name: 'Water Usage Optimization', desc: 'AI leak detection and conservation', icon: Droplets, route: '/water-usage-optimization', color: 'from-cyan-500 to-sky-500', bgColor: 'bg-cyan-500/10', textColor: 'text-cyan-400' },
+  { name: 'Chilled Water Load Shed', desc: 'Demand-response readiness by chiller plant and tenant impact', icon: Droplets, route: '/chilled-water-load-shed', color: 'from-cyan-500 to-blue-500', bgColor: 'bg-cyan-500/10', textColor: 'text-cyan-400' },
 ]
 
 const stats = [

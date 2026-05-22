@@ -27,6 +27,7 @@ import activityRoutes from './routes/activity.js';
 import profileRoutes from './routes/profile.js';
 import aiRoutes from './routes/ai.js';
 import authMiddleware from './middleware/auth.js';
+import chilledWaterLoadShedRoutes from './routes/chilledWaterLoadShed.js';
 import pool from './db.js';
 
 const app = express();
@@ -128,6 +129,7 @@ app.use('/api/ai/predictive-maintenance', aiPredictivemaintenanceRoutes);
 // Custom Views mount (mounted BEFORE 404 fallback)
 import customViewsRoutes from './routes/customViews.js';
 app.use('/api/custom-views', authMiddleware, customViewsRoutes);
+app.use('/api/chilled-water-load-shed', authMiddleware, chilledWaterLoadShedRoutes);
 
 // 404 fallback for unknown /api routes
 app.use('/api', (req, res) => {

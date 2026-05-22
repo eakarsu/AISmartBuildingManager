@@ -33,6 +33,7 @@ import EnergyForecastPage from './pages/EnergyForecastPage'
 import ComfortOptimizationPage from './pages/ComfortOptimizationPage'
 import WaterUsageOptimizationPage from './pages/WaterUsageOptimizationPage'
 import CustomViewsPage from './pages/CustomViewsPage'
+import ChilledWaterLoadShedPage from './pages/ChilledWaterLoadShedPage'
 
 // === Batch 07 Gaps & Frontend Mounts ===
 import CfWholebuildingEnergyOptimization from './pages/CfWholebuildingEnergyOptimization';
@@ -54,6 +55,9 @@ import GapNoTenantSubmeteringBillback from './pages/GapNoTenantSubmeteringBillba
 import GapLimitedEmergencyResponseWorkflows from './pages/GapLimitedEmergencyResponseWorkflows';
 import GapNoVendorManagementContractors from './pages/GapNoVendorManagementContractors';
 import GapNoDemandresponseGridIntegration from './pages/GapNoDemandresponseGridIntegration';
+import CodexCustomVizFeature from './pages/CodexCustomVizFeature';
+import CodexOperationsFeature from './pages/CodexOperationsFeature';
+
 // === End Batch 07 ===
 
 
@@ -86,6 +90,9 @@ export default function App() {
         }}
       />
       <Routes>
+        <Route path="/codex/custom-viz" element={<ProtectedRoute><CodexCustomVizFeature /></ProtectedRoute>} />
+        <Route path="/codex/operations" element={<ProtectedRoute><CodexOperationsFeature /></ProtectedRoute>} />
+
         <Route path="/" element={<Login />} />
         <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/hvac" element={<ProtectedRoute><HVACPage /></ProtectedRoute>} />
@@ -117,6 +124,7 @@ export default function App() {
         <Route path="/energy-forecast" element={<ProtectedRoute><EnergyForecastPage /></ProtectedRoute>} />
         <Route path="/comfort-optimization" element={<ProtectedRoute><ComfortOptimizationPage /></ProtectedRoute>} />
         <Route path="/water-usage-optimization" element={<ProtectedRoute><WaterUsageOptimizationPage /></ProtectedRoute>} />
+        <Route path="/chilled-water-load-shed" element={<ProtectedRoute><ChilledWaterLoadShedPage /></ProtectedRoute>} />
           {/* === Batch 07 Gaps & Frontend Mounts === */}
           <Route path='/cf-wholebuilding-energy-optimization' element={<CfWholebuildingEnergyOptimization />} />
           <Route path='/cf-thermal-comfort-prediction' element={<CfThermalComfortPrediction />} />

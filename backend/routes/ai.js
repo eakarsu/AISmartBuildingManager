@@ -48,7 +48,7 @@ async function callOpenRouter(messages) {
       'X-Title': 'AI Smart Building Manager',
     },
     body: JSON.stringify({
-      model: 'anthropic/claude-3-5-sonnet-20241022',
+      model: process.env.OPENROUTER_MODEL || 'anthropic/claude-3-5-sonnet-20241022',
       messages,
       max_tokens: 2000,
       temperature: 0.7,
