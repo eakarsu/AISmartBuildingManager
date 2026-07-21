@@ -5,6 +5,8 @@ import pg from 'pg';
 import bcrypt from 'bcryptjs';
 
 const { Pool } = pg;
+const DATABASE_URL = process.env.DATABASE_URL;
+const TARGET_DATABASE = process.env.DB_NAME || 'smart_building';
 
 const DB_CONFIG = {
   host: process.env.DB_HOST || 'localhost',
@@ -14,6 +16,7 @@ const DB_CONFIG = {
 };
 
 async function createDatabase() {
+  if (DATABASE_URL || process.env.DB_NAME) return;
   const pool = new Pool({ ...DB_CONFIG, database: 'postgres' });
   try {
     const result = await pool.query(
@@ -36,8 +39,10 @@ async function seed() {
   // Step 1: Create database if needed
   await createDatabase();
 
-  // Step 2: Connect to smart_building
-  const pool = new Pool({ ...DB_CONFIG, database: 'smart_building' });
+  // Step 2: Connect to the configured database
+  const pool = DATABASE_URL
+    ? new Pool({ connectionString: DATABASE_URL })
+    : new Pool({ ...DB_CONFIG, database: TARGET_DATABASE });
 
   try {
     // Step 3: Drop existing tables

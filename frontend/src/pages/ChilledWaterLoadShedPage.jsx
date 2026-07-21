@@ -9,20 +9,39 @@ export default function ChilledWaterLoadShedPage() {
   const [events, setEvents] = useState([]);
   const [summary, setSummary] = useState({ total: 0, shedKw: 0, blocked: 0 });
   const [form, setForm] = useState(emptyForm);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState('');
 
   const load = async () => {
-    const res = await api.get('/chilled-water-load-shed');
-    setEvents(res.data.events || []);
-    setSummary(res.data.summary || { total: 0, shedKw: 0, blocked: 0 });
+    setLoading(true);
+    setError('');
+    try {
+      const res = await api.get('/chilled-water-load-shed');
+      setEvents(res.data.events || []);
+      setSummary(res.data.summary || { total: 0, shedKw: 0, blocked: 0 });
+    } catch (requestError) {
+      setError(requestError.message || 'Unable to load chilled-water events.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => { load(); }, []);
 
   const submit = async (event) => {
     event.preventDefault();
-    await api.post('/chilled-water-load-shed', form);
-    setForm(emptyForm);
-    load();
+    setSaving(true);
+    setError('');
+    try {
+      await api.post('/chilled-water-load-shed', form);
+      setForm(emptyForm);
+      await load();
+    } catch (requestError) {
+      setError(requestError.message || 'Unable to save the load-shed event.');
+    } finally {
+      setSaving(false);
+    }
   };
 
   return (
@@ -43,14 +62,17 @@ export default function ChilledWaterLoadShedPage() {
           {['plant', 'chiller', 'tenantImpact', 'window'].map(field => <input key={field} className="bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 text-white" placeholder={field} value={form[field]} onChange={e => setForm({ ...form, [field]: e.target.value })} />)}
           <input className="bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 text-white" type="number" value={form.shedKw} onChange={e => setForm({ ...form, shedKw: e.target.value })} />
           <select className="bg-dark-900 border border-dark-700 rounded-lg px-3 py-2 text-white" value={form.status} onChange={e => setForm({ ...form, status: e.target.value })}><option>ready</option><option>blocked</option><option>testing</option></select>
-          <button className="bg-primary-600 rounded-lg px-4 py-2 text-white font-semibold">Add Event</button>
+          <button disabled={saving} className="bg-primary-600 rounded-lg px-4 py-2 text-white font-semibold disabled:opacity-50">{saving ? 'Saving…' : 'Add Event'}</button>
         </form>
-        <div className="bg-dark-800 border border-dark-700 rounded-xl overflow-hidden">
+        {error && <div role="alert" className="mb-4 rounded-xl border border-red-500/50 bg-red-950/40 p-4 text-red-200">{error} <button type="button" className="ml-3 underline" onClick={load}>Retry</button></div>}
+        {loading && <div role="status" className="bg-dark-800 border border-dark-700 rounded-xl p-8 text-center text-dark-300">Loading chilled-water events…</div>}
+        {!loading && !error && events.length === 0 && <div className="bg-dark-800 border border-dark-700 rounded-xl p-8 text-center text-dark-300">No load-shed events have been recorded.</div>}
+        {!loading && events.length > 0 && <div className="bg-dark-800 border border-dark-700 rounded-xl overflow-hidden">
           <table className="w-full text-left text-sm">
             <thead className="bg-dark-900 text-dark-300"><tr>{['Plant', 'Chiller', 'Shed kW', 'Tenant Impact', 'Window', 'Status'].map(h => <th key={h} className="p-3">{h}</th>)}</tr></thead>
             <tbody>{events.map(row => <tr key={row.id} className="border-t border-dark-700"><td className="p-3">{row.plant}</td><td>{row.chiller}</td><td>{row.shedKw}</td><td>{row.tenantImpact}</td><td>{row.window}</td><td>{row.status}</td></tr>)}</tbody>
           </table>
-        </div>
+        </div>}
       </main>
     </div>
   );
