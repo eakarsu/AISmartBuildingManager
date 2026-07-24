@@ -46,4 +46,19 @@ router.post('/login', async (req, res, next) => {
   }
 });
 
+router.get('/me', async (req, res, next) => {
+  try {
+    const header = req.headers.authorization || '';
+    const token = header.startsWith('Bearer ') ? header.slice(7) : '';
+    if (!token) return res.status(401).json({ error: 'Authentication required' });
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const result = await pool.query('SELECT id,email,name,role FROM users WHERE id=$1', [decoded.id]);
+    if (!result.rows[0]) return res.status(401).json({ error: 'Identity is no longer active' });
+    return res.json({ user: result.rows[0] });
+  } catch (err) {
+    if (err.name === 'JsonWebTokenError' || err.name === 'TokenExpiredError') return res.status(401).json({ error: 'Invalid or expired token' });
+    return next(err);
+  }
+});
+
 export default router;

@@ -22,43 +22,41 @@ function parseAIJson(raw) {
 }
 
 async function persistAIResult(userId, endpoint, inputData, result) {
-  try {
-    await pool.query(
-      `INSERT INTO ai_results (user_id, endpoint, input_data, result, created_at)
-       VALUES ($1, $2, $3, $4, NOW())`,
-      [userId || null, endpoint, JSON.stringify(inputData), JSON.stringify(result)]
-    );
-  } catch (e) {
-    console.error('Failed to persist AI result:', e.message);
-  }
+  await pool.query(
+    `INSERT INTO ai_results (user_id, endpoint, input_data, result, created_at)
+     VALUES ($1, $2, $3, $4, NOW())`,
+    [userId || null, endpoint, JSON.stringify(inputData), JSON.stringify(result)]
+  );
 }
 
 async function callOpenRouter(messages) {
-  if (!process.env.OPENROUTER_API_KEY) {
-    const err = new Error('AI provider not configured (OPENROUTER_API_KEY missing).');
-    err.status = 503;
-    throw err;
-  }
-  const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
+  const apiKey = process.env.OPENROUTER_API_KEY;
+  const model = process.env.OPENROUTER_MODEL;
+  const baseUrl = String(process.env.OPENROUTER_BASE_URL || '').replace(/\/$/, '');
+  if (!apiKey || !model || !baseUrl) throw Object.assign(new Error('OpenRouter runtime configuration is required'), { status: 503 });
+  const response = await fetch(`${baseUrl}/chat/completions`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      'Authorization': `Bearer ${apiKey}`,
       'HTTP-Referer': process.env.CLIENT_URL || 'http://localhost:3000',
       'X-Title': 'AI Smart Building Manager',
     },
     body: JSON.stringify({
-      model: process.env.OPENROUTER_MODEL || 'anthropic/claude-3-5-sonnet-20241022',
+      model,
       messages,
       max_tokens: 2000,
       temperature: 0.7,
     }),
   });
   if (!response.ok) {
-    const err = await response.text();
-    throw new Error(`OpenRouter error: ${response.status} - ${err}`);
+    throw new Error(`OpenRouter request failed with HTTP ${response.status}`);
   }
-  return response.json();
+  const data = await response.json();
+  const content = String(data?.choices?.[0]?.message?.content || '').trim();
+  if (!content) throw new Error('OpenRouter returned empty content');
+  data.choices[0].message.content = content;
+  return data;
 }
 
 function validate(rules) {
