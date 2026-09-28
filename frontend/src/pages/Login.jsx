@@ -110,7 +110,7 @@ export default function Login() {
               className="w-full py-2.5 bg-dark-700 hover:bg-dark-600 text-dark-300 hover:text-white font-medium rounded-lg border border-dark-600 flex items-center justify-center gap-2"
             >
               <Zap size={16} />
-              Quick Login (Demo)
+              Auto Fill Demo Credentials
             </button>
           </div>
 
