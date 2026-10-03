@@ -1,5 +1,6 @@
+import AppSidebar from './components/AppSidebar';
 import React from 'react'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
@@ -69,6 +70,15 @@ function ProtectedRoute({ children }) {
   return children
 }
 
+function SidebarFrame({ children }) {
+  const location = useLocation()
+  const show = Boolean(localStorage.getItem('token')) && location.pathname !== '/'
+  return <div className={show ? 'codex-nav-shell' : undefined}>
+    {show && <AppSidebar />}
+    {children}
+  </div>
+}
+
 export default function App() {
   return (
     <>
@@ -89,7 +99,7 @@ export default function App() {
           },
         }}
       />
-      <Routes>
+      <SidebarFrame><Routes>
         <Route path="/codex/custom-viz" element={<ProtectedRoute><CodexCustomVizFeature /></ProtectedRoute>} />
         <Route path="/codex/operations" element={<ProtectedRoute><CodexOperationsFeature /></ProtectedRoute>} />
 
@@ -147,7 +157,7 @@ export default function App() {
           <Route path='/gap-no-demandresponse-grid-integration' element={<GapNoDemandresponseGridIntegration />} />
           {/* === End Batch 07 === */}
           <Route path="/custom-views" element={<ProtectedRoute><CustomViewsPage /></ProtectedRoute>} />
-      </Routes>
+      </Routes></SidebarFrame>
     </>
   )
 }
